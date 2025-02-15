@@ -1,11 +1,15 @@
 CC=gcc
-FLAGS=-Wall -Wextra -march=native -O1
+ASM=-S
+FLAGS=-Wall -Wextra -march=native -O
 
-default: main
-	
-main: main.c run.s
-	$(CC) $(FLAGS) -o main main.c run.s
+default: main main.s
+
+main: main.c
+	$(CC) $(FLAGS) -o $@ $<
+
+main.s: main.c
+	$(CC) $(FLAGS) $(ASM) -o $@ $<
 
 
 clean:
-	rm main
+	rm main main.s
