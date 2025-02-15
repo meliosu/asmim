@@ -1,6 +1,6 @@
-#include <emmintrin.h>
 #include <immintrin.h>
 #include <stdio.h>
+#include <x86intrin.h>
 
 #define OPERATIONS 60000000
 
@@ -23,7 +23,7 @@ void warmup() {
 double measure_latency() {
     __m128d value = _mm_set1_pd(2.0);
 
-    u64 start = __rdtsc();
+    u64 start = __builtin_ia32_rdtsc();
 
     for (int i = 0; i < OPERATIONS / 4; i++) {
         value = _mm_mul_pd(value, value);
@@ -32,7 +32,7 @@ double measure_latency() {
         value = _mm_mul_pd(value, value);
     }
 
-    u64 end = __rdtsc();
+    u64 end = __builtin_ia32_rdtsc();
 
     used(value);
 
@@ -47,7 +47,7 @@ double measure_throughput() {
     __m128d value4 = _mm_set1_pd(6.0);
     __m128d value5 = _mm_set1_pd(7.0);
 
-    u64 start = __rdtsc();
+    u64 start = __builtin_ia32_rdtsc();
 
     for (int i = 0; i < OPERATIONS / 6; i++) {
         value0 = _mm_mul_pd(value0, value0);
@@ -58,7 +58,7 @@ double measure_throughput() {
         value5 = _mm_mul_pd(value5, value5);
     }
 
-    u64 end = __rdtsc();
+    u64 end = __builtin_ia32_rdtsc();
 
     used(value0);
     used(value1);
