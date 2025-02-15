@@ -45,17 +45,15 @@ double measure_throughput() {
     __m128d value2 = _mm_set1_pd(4.0);
     __m128d value3 = _mm_set1_pd(5.0);
     __m128d value4 = _mm_set1_pd(6.0);
-    __m128d value5 = _mm_set1_pd(7.0);
 
     u64 start = __builtin_ia32_rdtsc();
 
-    for (int i = 0; i < OPERATIONS / 6; i++) {
+    for (int i = 0; i < OPERATIONS / 5; i++) {
         value0 = _mm_mul_pd(value0, value0);
         value1 = _mm_mul_pd(value1, value1);
         value2 = _mm_mul_pd(value2, value2);
         value3 = _mm_mul_pd(value3, value3);
         value4 = _mm_mul_pd(value4, value4);
-        value5 = _mm_mul_pd(value5, value5);
     }
 
     u64 end = __builtin_ia32_rdtsc();
@@ -65,7 +63,6 @@ double measure_throughput() {
     used(value2);
     used(value3);
     used(value4);
-    used(value5);
 
     return (double)OPERATIONS / (double)(end - start);
 }
