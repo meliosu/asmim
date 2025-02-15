@@ -74,8 +74,8 @@ int main() {
     double throughput = measure_throughput();
 
     printf(
-        "Latency: %.2lf\n"
-        "Throughput: %.2lf\n",
+        "Latency: %.3lf\n"
+        "Throughput: %.3lf\n",
         latency,
         throughput
     );
