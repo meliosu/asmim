@@ -25,9 +25,7 @@ double measure_latency() {
 
     u64 start = __rdtsc();
 
-    for (int i = 0; i < OPERATIONS / 6; i++) {
-        value = _mm_mul_pd(value, value);
-        value = _mm_mul_pd(value, value);
+    for (int i = 0; i < OPERATIONS / 4; i++) {
         value = _mm_mul_pd(value, value);
         value = _mm_mul_pd(value, value);
         value = _mm_mul_pd(value, value);
@@ -48,8 +46,6 @@ double measure_throughput() {
     __m128d value3 = _mm_set1_pd(5.0);
     __m128d value4 = _mm_set1_pd(6.0);
     __m128d value5 = _mm_set1_pd(7.0);
-
-    asm volatile("");
 
     u64 start = __rdtsc();
 
