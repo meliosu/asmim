@@ -12,8 +12,8 @@
                                        "nop\n"                                 \
                                        ".endr\n")
 
-#define DATA_SIZE (1000 * 1000 * 16)
-#define OPERATIONS (1000 * 1000 * 1024)
+#define DATA_SIZE (1000 * 1000 * 24)
+#define OPERATIONS (1000 * 1000 * 24)
 
 void used(long value) {
     asm volatile("" : "+r"(value));

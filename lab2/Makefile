@@ -1,6 +1,7 @@
+NUM_NOPS?=0
+
 CC=gcc
-OPTLEVEL=1
-FLAGS=-Wall -Wextra -O$(OPTLEVEL)
+FLAGS=-Wall -Wextra -O1 -DNUM_NOPS=$(NUM_NOPS)
 
 default: main main.s
 
