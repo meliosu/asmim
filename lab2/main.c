@@ -2,13 +2,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define NOP(N)                                                                 \
-    asm volatile(".rept " #N "\n"                                              \
-                 "nop\n"                                                       \
-                 ".endr\n")
+#ifndef NUM_NOPS
+    #define NUM_NOPS 0
+#endif
 
-#define DATA_SIZE (1000 * 1000 * 32)
-#define OPERATIONS (1000 * 1000 * 32)
+#define STRINGIFY(X) #X
+#define NOP(N)                                                                 \
+    asm volatile(".rept " STRINGIFY(N) "\n"                                    \
+                                       "nop\n"                                 \
+                                       ".endr\n")
+
+#define DATA_SIZE (1000 * 1000 * 16)
+#define OPERATIONS (1000 * 1000 * 1024)
 
 void used(long value) {
     asm volatile("" : "+r"(value));
@@ -48,12 +53,13 @@ void warmup(long *array) {
 
 uint64_t workload(long *array, long operations) {
     long index = 0;
+
     uint64_t beg = __builtin_ia32_rdtsc();
 
     while (operations--) {
         index = array[index];
 
-        NOP(10);
+        NOP(NUM_NOPS);
     }
 
     uint64_t end = __builtin_ia32_rdtsc();
