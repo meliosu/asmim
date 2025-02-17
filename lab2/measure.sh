@@ -1,13 +1,9 @@
 #!/bin/env bash
 
-output_file="output.txt"
-
 min=0
 max=400
 inc=20
 samples=3
-
-> "$output_file"
 
 for ((i=min; i<=max; i+=inc)); do
     gcc -DNUM_NOPS=$i -O1 -o main main.c
@@ -23,6 +19,6 @@ for ((i=min; i<=max; i+=inc)); do
         outputs+="$(./main) "
     done
 
-    echo "$i ${outputs[*]}" | tee -a $output_file
+    echo "$i ${outputs[*]}"
     rm main
 done
