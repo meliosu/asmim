@@ -24,4 +24,5 @@ for ((i=0; i<=500; i+=10)); do
     done
 
     echo "$i ${outputs[*]}" | tee -a $output_file
+    rm main
 done
