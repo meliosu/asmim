@@ -5,11 +5,11 @@ output_file="output.txt"
 min=0
 max=400
 inc=20
-samples=5
+samples=3
 
 > "$output_file"
 
-for ((i=0; i<=500; i+=10)); do
+for ((i=0; i<=500; i+=inc)); do
     gcc -DNUM_NOPS=$i -O1 -o main main.c
 
     if [[ $? -ne 0 ]]; then
