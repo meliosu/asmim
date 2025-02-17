@@ -21,7 +21,7 @@ void used(long value) {
 
 void shuffle(long *array, long len) {
     for (long i = len - 1; i > 0; i--) {
-        long j = rand() % (i + 1);
+        long j = rand() % i;
 
         long temp = array[i];
         array[i] = array[j];
