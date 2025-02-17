@@ -9,7 +9,7 @@ samples=3
 
 > "$output_file"
 
-for ((i=0; i<=500; i+=inc)); do
+for ((i=min; i<=max; i+=inc)); do
     gcc -DNUM_NOPS=$i -O1 -o main main.c
 
     if [[ $? -ne 0 ]]; then
